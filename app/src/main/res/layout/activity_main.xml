@@ -14,5 +14,25 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:onClick="click1"/>
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="调用Native方法，String类型的形参，String类型返回值"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn1"
+        android:layout_marginTop="10dp"
+        android:onClick="click2"/>
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="调用Native方法，int[]类型的形参，int[]类型返回值"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn2"
+        android:layout_marginTop="10dp"
+        android:onClick="click3"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
