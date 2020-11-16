@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public native void callDataProvider_helloFromJNI();
+
     public void click1(View view) {
         int result = mDataPro.add(5, 5);
         Toast.makeText(view.getContext(), "result   " + result, Toast.LENGTH_LONG).show();
@@ -48,4 +50,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void click4(View view) {
+        mDataPro.callHelloFromJNI();
+    }
+
+    public void click5(View view) {
+        mDataPro.callAdd2(88,12);
+    }
+
+    public void click6(View view) {
+        mDataPro.callPrintString("call me a zhe");
+    }
+
+    public void click7(View view) {
+        mDataPro.callStaticPrintString();
+    }
+
+    public void click8(View view) {
+        callDataProvider_helloFromJNI();
+    }
 }

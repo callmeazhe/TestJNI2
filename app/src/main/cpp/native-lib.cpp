@@ -84,3 +84,85 @@ Java_com_example_testjni2_DataProvider_modifyIntArray(JNIEnv *env, jobject thiz,
     env->ReleaseIntArrayElements(arr,intarr,0);
     return arr;
 }
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_example_testjni2_DataProvider_callHelloFromJNI(JNIEnv *env, jobject thiz) {
+    // TODO: implement callHelloFromJNI()
+    jclass providerCls = env -> FindClass("com/example/testjni2/DataProvider");
+    if (providerCls == 0){
+        LOGI("jclass DataProvider not found");
+        return;
+    }
+    jmethodID jmethodId = env->GetMethodID(providerCls,"helloFromJNI","()V");
+    if (jmethodId == 0){
+        LOGI("jmethodID helloFromJNI not found");
+        return;
+    }
+    env->CallVoidMethod(thiz,jmethodId);
+}
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_example_testjni2_DataProvider_callAdd2(JNIEnv *env, jobject thiz, jint x, jint y) {
+    jclass providerCls = env -> FindClass("com/example/testjni2/DataProvider");
+    if (providerCls == 0){
+        LOGI("jclass DataProvider not found");
+        return;
+    }
+    jmethodID jmethodId = env->GetMethodID(providerCls,"add2","(II)I");
+    if (jmethodId == 0){
+        LOGI("jmethodID add2 not found");
+        return;
+    }
+    env->CallIntMethod(thiz,jmethodId,x,y);
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_example_testjni2_DataProvider_callPrintString(JNIEnv *env, jobject thiz, jstring s) {
+    jclass providerCls = env -> FindClass("com/example/testjni2/DataProvider");
+    if (providerCls == 0){
+        LOGI("jclass DataProvider not found");
+        return;
+    }
+    jmethodID jmethodId = env->GetMethodID(providerCls,"printString", "(Ljava/lang/String;)V");
+    if (jmethodId == 0){
+        LOGI("jmethodID printString not found");
+        return;
+    }
+//    env->CallVoidMethod(thiz,jmethodId,s);
+    env->CallVoidMethod(thiz,jmethodId,env->NewStringUTF("call me xiao xuan"));
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_example_testjni2_DataProvider_callStaticPrintString(JNIEnv *env, jobject thiz) {
+    jclass providerCls = env -> FindClass("com/example/testjni2/DataProvider");
+    if (providerCls == 0){
+        LOGI("jclass DataProvider not found");
+        return;
+    }
+    jmethodID jmethodId = env->GetStaticMethodID(providerCls,"staticPrintString", "(Ljava/lang/String;)V");
+    if (jmethodId == 0){
+        LOGI("jmethodID printString not found");
+        return;
+    }
+    env->CallStaticVoidMethod(providerCls,jmethodId,env->NewStringUTF("static call me lao er"));
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_example_testjni2_MainActivity_callDataProvider_1helloFromJNI(JNIEnv *env, jobject thiz) {
+    jclass providerCls = env -> FindClass("com/example/testjni2/DataProvider");
+    if (providerCls == 0){
+        LOGI("jclass DataProvider not found");
+        return;
+    }
+    jmethodID jmethodId = env->GetMethodID(providerCls,"helloFromJNI","()V");
+    if (jmethodId == 0){
+        LOGI("jmethodID helloFromJNI not found");
+        return;
+    }
+    jobject providerObject = env->AllocObject(providerCls);
+    env->CallVoidMethod(providerObject,jmethodId);
+}
